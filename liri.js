@@ -1,4 +1,7 @@
-require("dotenv").config();
+
+var fs = require('fs');
+var spotify = require('node-spotify-api');
+var dotenv = require("dotenv").config();
 var keys = require("./keys.js");
 
 //Date for concert-this
@@ -8,11 +11,7 @@ moment().format();
 // NPM module used to access OMDB API.
 var request = require('request');
 
-//NPM module used to read the random.txt file.
-var fs = require('fs');
-
 // NPM module used to access Spotify API.
-var Spotify = require('node-spotify-api');
 var spotify = new spotify(keys.spotify);
 
 //variable for input
@@ -36,7 +35,7 @@ function concertIt(bandQuery) {
 
             var concertData = JSON.parse(body);
 
-            var concertDT = concertData[0].datetime
+            var concertDT = concertData[0].dateTime
             var momentDT = moment().format('L');
 
 
