@@ -1,5 +1,7 @@
 # liri-node-app
 
+In this app you will find four functions concert(see below), spotify(see below), movie(see below), and do-it-this-way(see below). Each function follows a search command that outputs the different array's that you want to see. 
+
 How to use:
     Use node to run this program. using node liri.js to run one of the following.
         * concert-this
@@ -13,6 +15,7 @@ Concert-this command will provided you with:
     * Name of the venue
     * Venue location
     * Date of the Event
+![node images](/image/screenshot(14).png)
 
 spotify-this-song command will provided you with:
     * Artist(s)
@@ -20,6 +23,7 @@ spotify-this-song command will provided you with:
     * A preview link of the song from Spotify
     * The album that the song is from
     * If no song is provided then your program will default to "The Sign" by Ace of Base. 
+![node images](/image/screenshot(13).png)
 
 Movie-this command will provided you with:
     * Title of the movie.
@@ -30,6 +34,7 @@ Movie-this command will provided you with:
     * Language of the movie.
     * Plot of the movie.
     * Actors in the movie.
+![node images](/image/screenshot(15).png)
 
 Using Do-what-it-says does:
     * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
@@ -38,6 +43,7 @@ Using Do-what-it-says does:
 
     * Edit the text in random.txt to test out the feature for movie-this and concert-this.
 
+[GitHub](https://github.com/lpettit1/liri-node-app
 
 Technologies Used:
     *javaScript
@@ -45,6 +51,10 @@ Technologies Used:
     *spotify API
     *Bands in Town API
     *OMDB API
+
+I am the programer developer of this app.
+
+
 
 
 

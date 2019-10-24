@@ -1,172 +1,119 @@
 
-var fs = require('fs');
-var spotify = require('node-spotify-api');
-var dotenv = require("dotenv").config();
+require("dotenv").config();
+var Spotify = require('node-spotify-api'); //Using the Spotify api and getting the key from keys.js
 var keys = require("./keys.js");
 
-//Date for concert-this
-var moment = require('moment');
+var spotify = new Spotify(keys.spotify);
+
+var moment = require('moment'); //Both required to use moment for node
 moment().format();
 
-// NPM module used to access OMDB API.
-var request = require('request');
+var axios = require('axios'); //To get the information from the APIs for movie and concert-this
 
-// NPM module used to access Spotify API.
-var spotify = new spotify(keys.spotify);
+var fs = require('fs'); //To read the random.txt file for the do-what-it-says function
 
-//variable for input
-var command = process.argv[2];
-var input = process.argv[3];
-
-//    * `concert-this`
-https://rest.bandsintown.com/artists/adel/events?app_id=codingbootcamp#
-function concertIt(bandQuery) {
-
-    // Then run a request to the OMDB API with the movie specified
-    var queryUrl = "https://rest.bandsintown.com/artists/" + bandQuery + "/events?app_id=codingbootcamp#";
-    // + movieQuery +
-    // This line is just to help us debug against the actual URL.
-    console.log(queryUrl);
-
-    request(queryUrl, function (error, response, body) {
-
-        // If the request is successful
-        if (!error && response.statusCode === 200) {
-
-            var concertData = JSON.parse(body);
-
-            var concertDT = concertData[0].dateTime
-            var momentDT = moment().format('L');
+var command = process.argv[2]; //For the switch statement
+var value = process.argv[3]; //To send the song/movie/concert to their respective functions
 
 
-            // console.log(concertData);
-            // for (i = 0; i < movieData.length && i < 5; i++) {
-            console.log("===============================");
-            // * Name of the venue
-            console.log("Venue Name : " + concertData[0].venue.name +
-                // * Venue location
-                "\nVenue Location: " + concertData[0].venue.city + "," + concertData[0].venue.country +
-                //  * Date of the Event (use moment to format this as "MM/DD/YYYY")
-                "\nDate of the Event: " + momentDT +
-                "\n===============================");
-            
-        };
+
+function concertThis(value) {
+    axios.get("https://rest.bandsintown.com/artists/" + value + "/events?app_id=codingbootcamp")
+    .then(function(response) {    
+        for (var i = 0; i < response.data.length; i++) {
+
+            var datetime = response.data[i].datetime; //Saves datetime response into a variable
+            var dateArr = datetime.split('T'); //Attempting to split the date and time in the response
+
+            var concertResults = 
+                "--------------------------------------------------------------------" +
+                    "\nVenue Name: " + response.data[i].venue.name + 
+                    "\nVenue Location: " + response.data[i].venue.city +
+                    "\nDate of the Event: " + moment(dateArr[0], "MM-DD-YYYY"); //dateArr[0] should be the date separated from the time
+            console.log(concertResults);
+        }
+    })
+    .catch(function (error) {
+        console.log(error);
     });
+        
+
 }
 
-//     * `spotify-this-song`
-function spotifyIt(musicSearch) {
-
-    //  * If no song is provided then your program will default to "The Sign" by Ace of Base.
-    if (musicSearch === undefined || null) {
-        musicSearch = "The Sign Ace of Base";
+function spotifySong(value) {
+    if(!value){
+        value = "The Sign";
     }
-
-    spotify.search({ type: 'track', query: musicSearch }, function (err, data) {
-        if (err) {
-            return console.log('Error occurred: ' + err);
-        }
+    spotify
+    .search({ type: 'track', query: value })
+    .then(function(response) {
+        for (var i = 0; i < 5; i++) {
+            var spotifyResults = 
+                "--------------------------------------------------------------------" +
+                    "\nArtist(s): " + response.tracks.items[i].artists[0].name + 
+                    "\nSong Name: " + response.tracks.items[i].name +
+                    "\nAlbum Name: " + response.tracks.items[i].album.name +
+                    "\nPreview Link: " + response.tracks.items[i].preview_url;
                     
-        else {
-            for (i = 0; i < data.tracks.items.length && i < 5; i++){
-            
-                var musicQuery = data.tracks.items[i];
-                // console.log("===============================");
-                 // * Artist(s)
-                console.log("Artist: " + musicQuery.artists[0].name +
-                // * The song's name
-                "\nSong Name: " + musicQuery.name +
-                //* A preview link of the song from Spotify
-                "\nLink to Song: " + musicQuery.preview_url +
-                //* The album that the song is from
-                "\nAlbum Name: " + musicQuery.album.name +
-                "\n===============================");
-            }
-        };  
+            console.log(spotifyResults);
+        }
+    })
+    .catch(function(err) {
+        console.log(err);
     });
 }
-// spotifyIt(); for testing
 
-// * `movie-this`
-function movieIt (movieQuery) {
- 
-    // * If the user doesn't type a movie in, the program will output data for the movie 'Mr.Nobody.'
-     if (movieQuery === undefined || null) {
-            movieQuery = "Mr.Nobody";
-        }
-
-    // Then run a request to the OMDB API with the movie specified
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieQuery + "&y=&plot=short&apikey=trilogy";
-
-    // This line is just to help us debug against the actual URL.
-    console.log(queryUrl);
-
-    request(queryUrl, function (error, response, body) { 
-        
-    // If the request is successful
-       if (!error && response.statusCode === 200) {      
-           // JSON.parse for legibility
-            var movieData = JSON.parse(body);
-                                   
-            // for (i = 0; i < movieData.length && i < 5; i++) {
-                console.log("===============================");
-            // * Title of the movie.              
-                console.log("Movie Title: " + movieData.Title +
-            // * Year the movie came out.
-                "\nYear: " + movieData.released +
-            // * IMDB Rating of the movie.
-                "\nIMDB Rating: " + movieData.imdbRating +
-            // * Rotten Tomatoes Rating of the movie.
-                "\nRotten Tomatoes Rating: " + movieData.Ratings[1].Value +
-            // * Country where the movie was produced.
-                "\nCountry: " + movieData.Country +
-            // * Language of the movie.
-                "\nLanguage: " + movieData.Language +
-            // * Plot of the movie.
-                "\nPlot: " + movieData.Plot +
-            // * Actors in the movie.
-                "\nActors: " + movieData.Actors +
-                "\n===============================");             
-            // };
-        };
-    }); 
-}
-// movieIt(); for testing
-
-//Switch for commands for all functions
-var ask = function (commands, funData){
-    switch(commands) {
-        case "concert-this":
-            concertIt(funData);
-            break;
-        case "movie-this" :
-            movieIt(funData);
-            break;    
-        case 'spotify-this-song':
-            spotifyIt(funData); 
-            break;
-        case 'do-what-it-says':
-            doWhatItSays(); 
-            break;
-        default:
-        console.log("Invalid command. Please try again");
+function movieThis(value) {
+    if(!value){
+        value = "mr nobody";
     }
-};
-
-//Do what it says reads text from random.txt file, command is ran
-var doWhatItSays = function() {
-    fs.readFile("random.txt", "utf8", function (err, data) {
-        if (err) throw err;
-            var randomText = data.split(",");
+    axios.get("https://www.omdbapi.com/?t=" + value + "&y=&plot=short&apikey=trilogy")
+    .then(function(response) {
         
-        if (randomText.length == 2) {
-            ask(randomText[0], randomText[1]);
-        }
-        else if (randomText.length == 1) {
-            ask(randomText[0]);
-        }
+            var movieResults = 
+                "--------------------------------------------------------------------" +
+                    "\nMovie Title: " + response.data.Title + 
+                    "\nYear of Release: " + response.data.Year +
+                    "\nIMDB Rating: " + response.data.imdbRating +
+                    "\nRotten Tomatoes Rating: " + response.data.Ratings[0].Value +
+                    "\nCountry Produced: " + response.data.Country +
+                    "\nLanguage: " + response.data.Language +
+                    "\nPlot: " + response.data.Plot +
+                    "\nActors/Actresses: " + response.data.Actors;
+            console.log(movieResults);
+    })
+    .catch(function (error) {
+        console.log(error);
     });
+    
 }
 
-// assigns args to ask for switch case
-ask (command, input);
+
+
+
+function doThis(value) {
+
+    fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error) {
+            return console.log(error);
+        }
+        var dataArr = data.split(',');
+        spotifySong(dataArr[0], dataArr[1]);
+        console.log(random.txt);
+    })
+}
+
+switch (command) {
+    case "concert-this":
+        concertThis(value);
+        break;
+    case "spotify-this-song":
+        spotifySong(value);
+        break;
+    case "movie-this":
+        movieThis(value);
+        break;
+    case "do-what-it-says":
+        doThis(value);
+        break;
+};

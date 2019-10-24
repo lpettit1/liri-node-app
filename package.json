@@ -1,0 +1,27 @@
+{
+  "name": "liri-node-app",
+  "version": "1.0.0",
+  "description": "How to use:\r     Use node to run this program. using node liri.js to run one of the following.\r         * concert-this\r         * spotify-this-song\r         * movie-this\r         * do-what-it-says",
+  "main": "keys.js",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.2.0",
+    "moment": "^2.24.0",
+    "node-spotify-api": "^1.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lpettit1/liri-node-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lpettit1/liri-node-app/issues"
+  },
+  "homepage": "https://github.com/lpettit1/liri-node-app#readme"
+}
