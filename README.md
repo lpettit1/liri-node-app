@@ -4,6 +4,7 @@ In this app you will find four functions concert(see below), spotify(see below),
 
 ##How to use:
     Use node to run this program. using node liri.js to run one of the following.
+
         * concert-this
 
         * spotify-this-song
@@ -15,6 +16,7 @@ In this app you will find four functions concert(see below), spotify(see below),
 "Example: node liri.js movie-this star wars"
 
 ##**Concert-this command will provided you with:**
+
     * Name of the venue
 
     * Venue location
@@ -22,6 +24,7 @@ In this app you will find four functions concert(see below), spotify(see below),
     * Date of the Event
 
 ##**spotify-this-song command will provided you with:**
+
     * Artist(s)
 
     * The song's name
@@ -33,6 +36,7 @@ In this app you will find four functions concert(see below), spotify(see below),
     * If no song is provided then your program will default to "The Sign" by Ace of Base. 
 
 ##**Movie-this command will provided you with:**
+
     * Title of the movie.
 
     * Year the movie came out.
@@ -59,7 +63,7 @@ In this app you will find four functions concert(see below), spotify(see below),
 [GitHub](https://github.com/lpettit1/liri-node-app
 
 ##**Screen Shots pictures**
-[link](https://drive.google.com/open?id=1H4LR2vAwWyBUqUWKCab2zT9SMF3xmaPj)
+[google drive](https://drive.google.com/open?id=1H4LR2vAwWyBUqUWKCab2zT9SMF3xmaPj)
 
 ##**Technologies Used:**
     *javaScript
@@ -69,7 +73,7 @@ In this app you will find four functions concert(see below), spotify(see below),
     *spotify API
 
     *Bands in Town API
-    
+
     *OMDB API
 
 ##**Authors**
