@@ -66,6 +66,7 @@ In this app you will find four functions concert(see below), spotify(see below),
 [google drive](https://drive.google.com/open?id=1H4LR2vAwWyBUqUWKCab2zT9SMF3xmaPj)
 
 ##**Technologies Used:**
+
     *javaScript
 
     *node.js
@@ -77,7 +78,7 @@ In this app you will find four functions concert(see below), spotify(see below),
     *OMDB API
 
 ##**Authors**
-* Luke Pettit
+* Luke Pettit *dave 
 
 
 
