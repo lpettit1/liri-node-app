@@ -1,8 +1,8 @@
-# liri-node-app
+#**LIRI-NODE-APP**
 
 In this app you will find four functions concert(see below), spotify(see below), movie(see below), and do-it-this-way(see below). Each function follows a search command that outputs the different array's that you want to see. 
 
-How to use:
+##How to use:
     Use node to run this program. using node liri.js to run one of the following.
         * concert-this
         * spotify-this-song
@@ -11,21 +11,21 @@ How to use:
 
 "Example: node liri.js movie-this star wars"
 
-Concert-this command will provided you with:
+##**Concert-this command will provided you with:**
     * Name of the venue
     * Venue location
     * Date of the Event
-![node images](/image/screenshot(14).png)
 
-spotify-this-song command will provided you with:
+
+##**spotify-this-song command will provided you with:**
     * Artist(s)
     * The song's name
     * A preview link of the song from Spotify
     * The album that the song is from
     * If no song is provided then your program will default to "The Sign" by Ace of Base. 
-![node images](/image/screenshot(13).png)
 
-Movie-this command will provided you with:
+
+##**Movie-this command will provided you with:**
     * Title of the movie.
     * Year the movie came out.
     * IMDB Rating of the movie.
@@ -34,9 +34,9 @@ Movie-this command will provided you with:
     * Language of the movie.
     * Plot of the movie.
     * Actors in the movie.
-![node images](/image/screenshot(15).png)
 
-Using Do-what-it-says does:
+
+##**Using Do-what-it-says does:**
     * Using the `fs` Node package, LIRI will take the text inside of random.txt and then use it to call one of LIRI's commands.
 
     * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
@@ -45,14 +45,18 @@ Using Do-what-it-says does:
 
 [GitHub](https://github.com/lpettit1/liri-node-app
 
-Technologies Used:
+##**Screen Shots pictures**
+[link](https://drive.google.com/open?id=1H4LR2vAwWyBUqUWKCab2zT9SMF3xmaPj)
+
+##**Technologies Used:**
     *javaScript
     *node.js
     *spotify API
     *Bands in Town API
     *OMDB API
 
-I am the programer developer of this app.
+##**Authors**
+* Luke Pettit
 
 
 
