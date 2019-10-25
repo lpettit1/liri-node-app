@@ -78,7 +78,7 @@ In this app you will find four functions concert(see below), spotify(see below),
     *OMDB API
 
 ##**Authors**
-* Luke Pettit *dave 
+* Luke Pettit * dave 
 
 
 
