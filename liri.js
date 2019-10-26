@@ -13,6 +13,7 @@ var axios = require('axios'); //To get the information from the APIs for movie a
 var fs = require('fs'); //To read the random.txt file for the do-what-it-says function
 
 var command = process.argv[2]; //For the switch statement
+
 var value = process.argv[3]; //To send the song/movie/concert to their respective functions
 
 
@@ -47,10 +48,11 @@ function spotifySong(value) {
     spotify
     .search({ type: 'track', query: value })
     .then(function(response) {
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < response.tracks.items.length; i++) {
+            
             var spotifyResults = 
                 "--------------------------------------------------------------------" +
-                    "\nArtist(s): " + response.tracks.items[i].artists[0].name + 
+                    "\nArtists: " + response.tracks.items[i].artists[0].name + 
                     "\nSong Name: " + response.tracks.items[i].name +
                     "\nAlbum Name: " + response.tracks.items[i].album.name +
                     "\nPreview Link: " + response.tracks.items[i].preview_url;
@@ -58,6 +60,7 @@ function spotifySong(value) {
             console.log(spotifyResults);
         }
     })
+    
     .catch(function(err) {
         console.log(err);
     });
@@ -97,9 +100,12 @@ function doThis(value) {
         if (error) {
             return console.log(error);
         }
-        var dataArr = data.split(',');
-        spotifySong(dataArr[0], dataArr[1]);
-        console.log(random.txt);
+        var dataArr = data.split(",");
+        spotifySong(dataArr[1]);
+        
+
+        
+        
     })
 }
 
