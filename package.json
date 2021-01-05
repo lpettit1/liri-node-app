@@ -4,7 +4,7 @@
   "description": "How to use:\r     Use node to run this program. using node liri.js to run one of the following.\r         * concert-this\r         * spotify-this-song\r         * movie-this\r         * do-what-it-says",
   "main": "keys.js",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
     "moment": "^2.24.0",
     "node-spotify-api": "^1.1.1"
